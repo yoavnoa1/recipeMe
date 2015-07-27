@@ -1,10 +1,12 @@
-package com.recipeme.recipeme;
+package com.recipeme.recipeme.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.recipeme.recipeme.R;
 
 public class SweetsFragment extends Fragment
 {
