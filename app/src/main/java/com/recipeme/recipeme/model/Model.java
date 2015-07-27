@@ -262,7 +262,7 @@ public class Model
 
         for (Ingredient ingredient : ingredients)
         {
-            String key = ingredient.getClass().toString();
+            String key = ingredient.getClass().getSimpleName();
             if (map.containsKey(key))
             {
                 map.get(key).add(ingredient.getName());
@@ -282,7 +282,7 @@ public class Model
 
         ParseQuery<ParseObject> query = new ParseQuery<>("Recipe");
         query.include("RSIngredient");
-        query.whereContainsAll("RSIngredient", parseObjects);
+        query.whereContainedIn("RSIngredient", parseObjects);
         List<ParseObject> queriedObjects = Lists.newArrayList();
         try
         {

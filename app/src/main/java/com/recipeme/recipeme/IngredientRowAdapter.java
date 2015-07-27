@@ -12,13 +12,13 @@ import java.util.List;
 
 public class IngredientRowAdapter<T extends Ingredient> extends BaseAdapter
 {
-    private List<T> ingredients;
-    private static LayoutInflater inflater = null;
+    private final List<T> ingredients;
+    private final LayoutInflater layoutInflater;
 
     public IngredientRowAdapter(LayoutInflater layoutInflater, List<T> ingredients)
     {
         this.ingredients = ingredients;
-        inflater = layoutInflater;
+        this.layoutInflater = layoutInflater;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class IngredientRowAdapter<T extends Ingredient> extends BaseAdapter
 
         if (convertView == null)
         {
-            vi = inflater.inflate(R.layout.ingredient_row_layout, null);
+            vi = layoutInflater.inflate(R.layout.ingredient_row_layout, null);
         }
 
         ((TextView)vi.findViewById(R.id.textView)).setText(ingredients.get(position).getName());

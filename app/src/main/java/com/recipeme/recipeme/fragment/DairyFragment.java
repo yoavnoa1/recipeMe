@@ -17,9 +17,9 @@ import java.util.List;
 
 public class DairyFragment extends Fragment
 {
-    IngredientRowAdapter<Dairy> rowAdapter;
-    ListViewOnClickListener listViewOnClickListener;
-    View view = null;
+    private IngredientRowAdapter<Dairy> rowAdapter;
+    private ListViewOnClickListener listViewOnClickListener;
+    private View view = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -29,7 +29,7 @@ public class DairyFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_dairy, container, false);
 
             List<Dairy> dairies = new Model().fetchDairies();
-            rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), dairies);
+            rowAdapter = new IngredientRowAdapter<>(inflater, dairies);
             listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
             ListView list = (ListView) view.findViewById(R.id.dairy_listView);
             list.setAdapter(rowAdapter);

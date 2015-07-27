@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.parse.Parse;
+import com.recipeme.recipeme.fragment.RecipeFragment;
 import com.recipeme.recipeme.model.Model;
 
 
@@ -113,7 +114,17 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_example)
         {
-            new Model().fetchRecipesBy(listViewOnClickListener.getIngredients());
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            RecipeFragment fragment = new RecipeFragment();
+
+            //todo:find batter way to salve solution.
+            fragment.setIngredients(listViewOnClickListener.getIngredients());
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+
             return true;
         }
 

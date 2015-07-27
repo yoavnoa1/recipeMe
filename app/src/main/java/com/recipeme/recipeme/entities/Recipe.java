@@ -1,6 +1,11 @@
 package com.recipeme.recipeme.entities;
 
-public class Recipe
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class Recipe implements Serializable
 {
     private String id;
     private String name;

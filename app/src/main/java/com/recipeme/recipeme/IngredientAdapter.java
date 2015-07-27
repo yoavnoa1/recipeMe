@@ -1,59 +1,37 @@
 package com.recipeme.recipeme;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.recipeme.recipeme.fragment.DairyFragment;
-import com.recipeme.recipeme.fragment.GrainsAndBeansFragment;
-import com.recipeme.recipeme.fragment.OilsFragment;
-import com.recipeme.recipeme.fragment.SweetsFragment;
+import java.util.List;
 
-import java.util.ArrayList;
-
-public class IngredientAdapter extends FragmentStatePagerAdapter
-{
-    private final ArrayList<Integer> titles = new ArrayList<>();
+public class IngredientAdapter extends FragmentStatePagerAdapter {
     private final Context context;
-    private final ArrayList<Fragment> fragments = new ArrayList<>();
+    private final List<Integer> titles;
+    private final List<Fragment> fragments;
 
-    public IngredientAdapter(FragmentManager fm, Context context, ListViewOnClickListener listViewOnClickListener)
+    public IngredientAdapter(FragmentManager fm,Context context,List<Integer> titles,List<Fragment> fragments)
     {
         super(fm);
         this.context = context;
-        titles.add(R.string.title1);
-        titles.add(R.string.title2);
-        titles.add(R.string.title3);
-        titles.add(R.string.title4);
-        DairyFragment fragment = new DairyFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Listener", listViewOnClickListener);
-        fragment.setArguments(bundle);
-        fragments.add(fragment);
-        fragments.add(new OilsFragment());
-        fragments.add(new SweetsFragment());
-        GrainsAndBeansFragment grainsAndBeansFragment = new GrainsAndBeansFragment();
-        grainsAndBeansFragment.setArguments(bundle);
-        fragments.add(grainsAndBeansFragment);
+        this.titles = titles;
+        this.fragments = fragments;
     }
 
     @Override
-    public Fragment getItem(int i)
-    {
+    public Fragment getItem(int i) {
         return fragments.get(i);
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return fragments.size();
     }
 
     @Override
-    public CharSequence getPageTitle(int i)
-    {
+    public CharSequence getPageTitle(int i) {
         return context.getString(titles.get(i));
     }
 }
