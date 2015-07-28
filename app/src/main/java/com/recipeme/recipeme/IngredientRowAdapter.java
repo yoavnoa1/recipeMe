@@ -1,24 +1,33 @@
 package com.recipeme.recipeme;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.recipeme.recipeme.entities.Ingredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientRowAdapter<T extends Ingredient> extends BaseAdapter
+public class IngredientRowAdapter<T extends Ingredient> extends ArrayAdapter<T> implements Filterable
 {
     private final List<T> ingredients;
     private final LayoutInflater layoutInflater;
+    private Filter2<T> filter;
 
-    public IngredientRowAdapter(LayoutInflater layoutInflater, List<T> ingredients)
+    public IngredientRowAdapter(LayoutInflater layoutInflater, List<T> ingredients, Context context)
     {
+        super(context, R.layout.ingredient_row_layout, ingredients);
         this.ingredients = ingredients;
         this.layoutInflater = layoutInflater;
+
+        filter = new Filter2<>(ingredients, this);
     }
 
     @Override
@@ -28,7 +37,7 @@ public class IngredientRowAdapter<T extends Ingredient> extends BaseAdapter
     }
 
     @Override
-    public Object getItem(int position)
+    public T getItem(int position)
     {
         return ingredients.get(position);
     }
@@ -52,5 +61,11 @@ public class IngredientRowAdapter<T extends Ingredient> extends BaseAdapter
         ((TextView)vi.findViewById(R.id.textView)).setText(ingredients.get(position).getName());
 
         return vi;
+    }
+
+    @Override
+    public Filter getFilter()
+    {
+        return filter;
     }
 }

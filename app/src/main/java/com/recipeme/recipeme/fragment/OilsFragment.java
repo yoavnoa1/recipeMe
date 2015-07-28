@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.recipeme.recipeme.IngredientRowAdapter;
 import com.recipeme.recipeme.ListViewOnClickListener;
 import com.recipeme.recipeme.R;
-import com.recipeme.recipeme.entities.Dairy;
 import com.recipeme.recipeme.entities.Oils;
 import com.recipeme.recipeme.model.Model;
 
@@ -33,7 +32,7 @@ public class OilsFragment  extends Fragment
             view = inflater.inflate(R.layout.fragment_dairy, container, false);
 
             List<Oils> oils = new Model().fetchOils();
-            rowAdapter = new IngredientRowAdapter<>(inflater, oils);
+            rowAdapter = new IngredientRowAdapter<>(inflater, oils, getActivity().getBaseContext());
             listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
             ListView list = (ListView) view.findViewById(R.id.dairy_listView);
             list.setAdapter(rowAdapter);

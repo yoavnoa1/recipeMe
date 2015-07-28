@@ -1,7 +1,6 @@
 package com.recipeme.recipeme;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.parse.Parse;
 import com.recipeme.recipeme.fragment.RecipeFragment;
-import com.recipeme.recipeme.model.Model;
 
 
 public class Main2Activity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks
@@ -58,7 +56,7 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
         Bundle bundle = new Bundle();
         bundle.putSerializable("Listener", listViewOnClickListener);
 
-        IngredientActivity fragment = new IngredientActivity();
+        IngredientFragment fragment = new IngredientFragment();
         fragment.setArguments(bundle);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)

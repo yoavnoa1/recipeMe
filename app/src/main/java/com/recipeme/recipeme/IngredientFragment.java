@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class IngredientActivity extends Fragment
+public class IngredientFragment extends Fragment
 {
-    IngredientAdapterFactory ingredientAdapterFactory = new IngredientAdapterFactory();
-    ViewPager viewPager;
+    private final IngredientAdapterFactory ingredientAdapterFactory = new IngredientAdapterFactory();
+    private ViewPager viewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
