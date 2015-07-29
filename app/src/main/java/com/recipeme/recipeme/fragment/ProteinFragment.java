@@ -26,7 +26,7 @@ public class ProteinFragment extends Fragment
     {
         if (view == null)
         {
-            view = inflater.inflate(R.layout.fragment_ingredient, container, false);
+            view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Protein> proteins = new Model().fetchIngredients(Protein.class);
             rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), proteins, getActivity().getBaseContext());

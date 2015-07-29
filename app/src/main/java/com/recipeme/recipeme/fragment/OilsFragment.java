@@ -29,7 +29,7 @@ public class OilsFragment  extends Fragment
         {
            // view = inflater.inflate(R.layout.fragment_oils, container, false);
 
-            view = inflater.inflate(R.layout.fragment_ingredient, container, false);
+            view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Oils> oils = new Model().fetchIngredients(Oils.class);
             rowAdapter = new IngredientRowAdapter<>(inflater, oils, getActivity().getBaseContext());

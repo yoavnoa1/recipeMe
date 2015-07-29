@@ -29,7 +29,7 @@ public class DairyFragment extends Fragment
     {
         if (view == null)
         {
-            view = inflater.inflate(R.layout.fragment_ingredient, container, false);
+            view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Dairy> dairies = new Model().fetchIngredients(Dairy.class);
             rowAdapter = new IngredientRowAdapter<>(inflater, dairies, getActivity().getBaseContext());

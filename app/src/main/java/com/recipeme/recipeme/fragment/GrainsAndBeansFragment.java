@@ -26,7 +26,7 @@ public class GrainsAndBeansFragment extends Fragment
     {
         if (view == null)
         {
-            view = inflater.inflate(R.layout.fragment_ingredient, container, false);
+            view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<GrainsAndBeans> dairies = new Model().fetchIngredients(GrainsAndBeans.class);
             rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), dairies, getActivity().getBaseContext());

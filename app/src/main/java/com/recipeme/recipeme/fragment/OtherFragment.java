@@ -26,7 +26,7 @@ public class OtherFragment extends Fragment
     {
         if (view == null)
         {
-            view = inflater.inflate(R.layout.fragment_ingredient, container, false);
+            view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Other> others = new Model().fetchIngredients(Other.class);
             rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), others, getActivity().getBaseContext());
