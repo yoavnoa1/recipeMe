@@ -1,17 +1,21 @@
-package com.recipeme.recipeme;
+package com.recipeme.recipeme.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.google.common.collect.Lists;
+import com.recipeme.recipeme.ListViewOnClickListener;
+import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.fragment.DairyFragment;
 import com.recipeme.recipeme.fragment.GrainsAndBeansFragment;
 import com.recipeme.recipeme.fragment.OilsFragment;
+import com.recipeme.recipeme.fragment.OtherFragment;
+import com.recipeme.recipeme.fragment.ProteinFragment;
 import com.recipeme.recipeme.fragment.SweetsFragment;
+import com.recipeme.recipeme.fragment.VegetablesAndFruitsFragment;
 
 import java.util.List;
 
@@ -49,9 +53,20 @@ public class IngredientAdapterFactory
         grainsAndBeansFragment.setArguments(bundle);
         fragments.add(grainsAndBeansFragment);
 
+        VegetablesAndFruitsFragment vegetablesAndFruitsFragment = new VegetablesAndFruitsFragment();
+        vegetablesAndFruitsFragment.setArguments(bundle);
+        fragments.add(vegetablesAndFruitsFragment);
+
+        ProteinFragment proteinFragment = new ProteinFragment();
+        proteinFragment.setArguments(bundle);
+        fragments.add(proteinFragment);
+
+        OtherFragment otherFragment = new OtherFragment();
+        otherFragment.setArguments(bundle);
+        fragments.add(otherFragment);
+
         return fragments;
     }
-
 
     private List<Integer> createPageTitleList()
     {
@@ -61,6 +76,9 @@ public class IngredientAdapterFactory
         titles.add(R.string.title2);
         titles.add(R.string.title3);
         titles.add(R.string.title4);
+        titles.add(R.string.title5);
+        titles.add(R.string.title6);
+        titles.add(R.string.title7);
 
         return titles;
     }

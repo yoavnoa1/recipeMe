@@ -9,13 +9,13 @@ import com.recipeme.recipeme.entities.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Filter2<T extends Ingredient> extends Filter
+public class IngredientFilter<T extends Ingredient> extends Filter
 {
     private final List<T> ingredients;
     private final List<T> ingredientsCopy = Lists.newArrayList();
     private final ArrayAdapter<T> dairyArrayAdapter;
 
-    public Filter2(List<T> ingredients, ArrayAdapter<T> dairyArrayAdapter)
+    public IngredientFilter(List<T> ingredients, ArrayAdapter<T> dairyArrayAdapter)
     {
         this.ingredients = ingredients;
         this.dairyArrayAdapter = dairyArrayAdapter;
@@ -47,7 +47,7 @@ public class Filter2<T extends Ingredient> extends Filter
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void publishResults(CharSequence contraint, FilterResults results)
+    protected void publishResults(CharSequence constraint, FilterResults results)
     {
         ingredients.clear();
         ingredients.addAll((ArrayList<T>) results.values);

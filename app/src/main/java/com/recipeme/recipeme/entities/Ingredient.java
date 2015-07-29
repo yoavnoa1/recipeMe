@@ -6,4 +6,5 @@ public interface Ingredient
     void setName(String name);
 
     String getId();
+    void setId(String Id);
 }

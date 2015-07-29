@@ -6,9 +6,11 @@
     <string name="title_activity_ingredient">IngredientActiv</string>
     <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="title_section1">משהו בעברית</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">ראשי</string>
+    <string name="title_section2">מצא מתכונים</string>
+    <string name="title_section3">מתכונים</string>
+    <string name="title_section4">מועדפים</string>
+    <string name="title_section5">הגדרות</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -17,6 +19,9 @@
     <string name="title2">שמנים</string>
     <string name="title3">מתוקים</string>
     <string name="title4">קטניות ודגנים</string>
+    <string name="title5">פירות וירקות</string>
+    <string name="title6">חלבונים</string>
+    <string name="title7">אחרים</string>
 
     <string name="action_example">Example action</string>
 </resources>

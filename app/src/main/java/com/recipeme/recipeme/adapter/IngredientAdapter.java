@@ -1,4 +1,4 @@
-package com.recipeme.recipeme;
+package com.recipeme.recipeme.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.recipeme.recipeme.Banner;
 import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.entities.Recipe;
 
@@ -22,18 +23,17 @@ public class RecipePageFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        if(view == null)
+        if (view == null)
         {
             view = inflater.inflate(R.layout.fragment_recipe_page, container, false);
 
-            recipe = (Recipe)getArguments().get("Recipe");
+            recipe = (Recipe) getArguments().get("Recipe");
 
-            ((TextView)view.findViewById(R.id.recipe_title)).setText(recipe.getName());
+            ((TextView) view.findViewById(R.id.recipe_title)).setText(recipe.getName());
 
-            ((TextView)view.findViewById(R.id.recipe_ingredients)).setText(recipe.getIngredient());
+            ((TextView) view.findViewById(R.id.recipe_ingredients)).setText(recipe.getIngredient());
 
-            ((TextView)view.findViewById(R.id.recipe_prep)).setText(recipe.getPreparation());
-
+            ((TextView) view.findViewById(R.id.recipe_prep)).setText(recipe.getPreparation());
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(recipe.getPicture(), 0, recipe.getPicture().length);
 

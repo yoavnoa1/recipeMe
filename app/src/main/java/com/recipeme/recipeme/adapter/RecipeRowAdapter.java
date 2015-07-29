@@ -1,4 +1,4 @@
-package com.recipeme.recipeme;
+package com.recipeme.recipeme.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.entities.Recipe;
 
 import java.util.List;

@@ -8,26 +8,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.recipeme.recipeme.adapter.IngredientAdapterFactory;
+
 
 public class IngredientFragment extends Fragment
 {
     private final IngredientAdapterFactory ingredientAdapterFactory = new IngredientAdapterFactory();
-    private ViewPager viewPager;
+    private View root = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View root = inflater.inflate(R.layout.activity_ingredient, container, false);
+        if (root == null)
+        {
+            root = inflater.inflate(R.layout.activity_ingredient, container, false);
 
-        ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener)getArguments().get("Listener");
+            ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
 
-        FragmentStatePagerAdapter ingredientAdapter =
-                ingredientAdapterFactory.createFrom(getFragmentManager(), root.getContext(), listViewOnClickListener);
-        viewPager = (ViewPager) root.findViewById(R.id.tabspager);
-        viewPager.setAdapter(ingredientAdapter);
+            FragmentStatePagerAdapter ingredientAdapter =
+                    ingredientAdapterFactory.createFrom(getFragmentManager(), root.getContext(), listViewOnClickListener);
+            ViewPager viewPager = (ViewPager) root.findViewById(R.id.tabspager);
+            viewPager.setAdapter(ingredientAdapter);
+        }
 
         return root;
     }
-
-
 }

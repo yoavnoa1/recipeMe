@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.recipeme.recipeme.IngredientRowAdapter;
+import com.recipeme.recipeme.adapter.IngredientRowAdapter;
 import com.recipeme.recipeme.ListViewOnClickListener;
 import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.entities.GrainsAndBeans;
@@ -26,12 +26,12 @@ public class GrainsAndBeansFragment extends Fragment
     {
         if (view == null)
         {
-            view = inflater.inflate(R.layout.fragment_grains_and_beans, container, false);
+            view = inflater.inflate(R.layout.fragment_ingredient, container, false);
 
-            List<GrainsAndBeans> dairies = new Model().fetchGrainsAndBeans();
+            List<GrainsAndBeans> dairies = new Model().fetchIngredients(GrainsAndBeans.class);
             rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), dairies, getActivity().getBaseContext());
             listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
-            ListView list = (ListView) view.findViewById(R.id.grains_and_beans_listView);
+            ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);
         }

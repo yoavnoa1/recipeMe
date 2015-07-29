@@ -1,25 +1,25 @@
-package com.recipeme.recipeme;
+package com.recipeme.recipeme.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.recipeme.recipeme.IngredientFilter;
+import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.entities.Ingredient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientRowAdapter<T extends Ingredient> extends ArrayAdapter<T> implements Filterable
 {
     private final List<T> ingredients;
     private final LayoutInflater layoutInflater;
-    private Filter2<T> filter;
+    private IngredientFilter<T> filter;
 
     public IngredientRowAdapter(LayoutInflater layoutInflater, List<T> ingredients, Context context)
     {
@@ -27,7 +27,7 @@ public class IngredientRowAdapter<T extends Ingredient> extends ArrayAdapter<T> 
         this.ingredients = ingredients;
         this.layoutInflater = layoutInflater;
 
-        filter = new Filter2<>(ingredients, this);
+        filter = new IngredientFilter<>(ingredients, this);
     }
 
     @Override

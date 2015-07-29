@@ -3,7 +3,6 @@ package com.recipeme.recipeme;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -17,51 +16,46 @@ import com.parse.Parse;
 import com.recipeme.recipeme.fragment.RecipeFragment;
 
 
-public class Main2Activity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks
+public class MainMenuActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
-
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    ListViewOnClickListener listViewOnClickListener = new ListViewOnClickListener();
+    private ListViewOnClickListener listViewOnClickListener = new ListViewOnClickListener();
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main_menu);
 
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "nnXR6GoxN8TIVrtRzPkIeh9g2AHupgqIxNBOKX0V", "Xv9uWGiFBVB2nkwmq8dxEpfZf3DLGXty0ZV2iiLE");
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position)
     {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("Listener", listViewOnClickListener);
 
         IngredientFragment fragment = new IngredientFragment();
         fragment.setArguments(bundle);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
 
+        startFragment(fragment);
+    }
+
+    private <T extends Fragment> void startFragment(T fragment)
+    {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack("tag")
+                .commit();
     }
 
     public void onSectionAttached(int number)
@@ -77,6 +71,12 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
         }
     }
 
@@ -87,7 +87,6 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -104,24 +103,17 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_example)
         {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-
             RecipeFragment fragment = new RecipeFragment();
 
             //todo:find batter way to salve solution.
             fragment.setIngredients(listViewOnClickListener.getIngredients());
 
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit();
+            startFragment(fragment);
 
             return true;
         }
@@ -129,21 +121,23 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+    @Override
+    public void onBackPressed()
+    {
+        if (getSupportFragmentManager().getBackStackEntryCount() != 0)
+        {
+            getSupportFragmentManager().popBackStack();
+
+        }
+        else
+        {
+            super.onBackPressed();
+        }
+    }
+
     public static class PlaceholderFragment extends Fragment
     {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
         private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
         public static PlaceholderFragment newInstance(int sectionNumber)
         {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -169,9 +163,8 @@ public class Main2Activity extends ActionBarActivity implements NavigationDrawer
         public void onAttach(Activity activity)
         {
             super.onAttach(activity);
-            ((Main2Activity) activity).onSectionAttached(
+            ((MainMenuActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
 }
