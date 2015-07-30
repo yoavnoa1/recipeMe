@@ -24,4 +24,6 @@
     <string name="title7">אחרים</string>
 
     <string name="action_example">Example action</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_recpie_deatils">RecpieDeatilsActivity</string>
 </resources>

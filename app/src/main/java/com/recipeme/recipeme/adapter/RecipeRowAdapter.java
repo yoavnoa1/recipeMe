@@ -54,8 +54,8 @@ public class RecipeRowAdapter extends BaseAdapter
         byte[] picture = recipes.get(position).getPicture();
         Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
 
-        ((ImageView)convertView.findViewById(R.id.icon)).setImageBitmap(bitmap);
-        ((TextView)convertView.findViewById(R.id.textView)).setText(recipes.get(position).getName());
+        ((ImageView)convertView.findViewById(R.id.avatar)).setImageBitmap(bitmap);
+        ((TextView)convertView.findViewById(R.id.recipe_name)).setText(recipes.get(position).getName());
 
         return convertView;
     }

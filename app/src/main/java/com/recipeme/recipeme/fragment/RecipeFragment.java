@@ -1,5 +1,6 @@
 package com.recipeme.recipeme.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.google.common.collect.Lists;
 import com.recipeme.recipeme.R;
+import com.recipeme.recipeme.RecpieDeatilsActivity;
 import com.recipeme.recipeme.adapter.RecipeRowAdapter;
 import com.recipeme.recipeme.entities.Ingredient;
 import com.recipeme.recipeme.entities.Recipe;
@@ -72,8 +74,6 @@ public class RecipeFragment extends Fragment
             list.setAdapter(rowAdapter);
             progressBar.setVisibility(View.GONE);
 
-            final FragmentManager fragmentManager = getFragmentManager();
-
             list.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
                 @Override
@@ -81,18 +81,10 @@ public class RecipeFragment extends Fragment
                 {
                     Recipe recipe = (Recipe) parent.getItemAtPosition(position);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("Recipe", recipe);
+                    RecpieDeatilsActivity.set(recipe);
+                    Intent intent = new Intent(view.getContext(), RecpieDeatilsActivity.class);
 
-                    RecipePageFragment recipePageFragment = new RecipePageFragment();
-
-                    recipePageFragment.setArguments(bundle);
-
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.container, recipePageFragment)
-                            .addToBackStack("tag")
-                            .commit();
-
+                    startActivity(intent);
                 }
             });
         }
