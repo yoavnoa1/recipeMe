@@ -1,9 +1,9 @@
 package com.recipeme.recipeme;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.recipeme.recipeme.entities.Ingredient;
 
@@ -22,13 +22,15 @@ public class ListViewOnClickListener implements AdapterView.OnItemClickListener,
         if (ingredients.contains(ingredient))
         {
             ingredients.remove(ingredient);
-            view.setBackground(new ColorDrawable(Color.WHITE));
+            view.setBackgroundColor(Color.parseColor("#FFF5F5F5"));
+            ((TextView)view.findViewById(R.id.textView)).setTextColor(Color.BLACK);
 
         }
         else
         {
             ingredients.add(ingredient);
-            view.setBackground(new ColorDrawable(Color.BLUE));
+            view.setBackgroundColor(Color.parseColor("#FF595A57"));
+            ((TextView)view.findViewById(R.id.textView)).setTextColor(Color.WHITE);
         }
     }
 

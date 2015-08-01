@@ -1,6 +1,8 @@
 package com.recipeme.recipeme.entities;
 
-public interface Ingredient
+import java.io.Serializable;
+
+public interface Ingredient extends Serializable
 {
     String getName();
     void setName(String name);

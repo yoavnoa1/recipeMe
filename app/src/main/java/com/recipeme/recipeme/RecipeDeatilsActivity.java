@@ -1,30 +1,22 @@
 package com.recipeme.recipeme;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.recipeme.recipeme.entities.Recipe;
 
-import java.io.Serializable;
-
-
-public class RecpieDeatilsActivity extends AppCompatActivity
+public class RecipeDeatilsActivity extends AppCompatActivity
 {
     private static Recipe recipe;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -56,8 +48,6 @@ public class RecpieDeatilsActivity extends AppCompatActivity
         Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
         Drawable drawable = new BitmapDrawable(bitmap);
         imageView.setImageDrawable(drawable);
-
-        //Glide.with(this).load(drawable).centerCrop().into(imageView);
 
         ((TextView) findViewById(R.id.prep)).setText(recipe.getPreparation());
         ((TextView) findViewById(R.id.ing)).setText(recipe.getIngredient());

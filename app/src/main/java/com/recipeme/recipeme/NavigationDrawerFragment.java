@@ -19,8 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -52,7 +57,7 @@ public class NavigationDrawerFragment extends Fragment
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListView;
+    private ExpandableListView mDrawerListView;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
@@ -95,7 +100,7 @@ public class NavigationDrawerFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        mDrawerListView = (ListView) inflater.inflate(
+        mDrawerListView = (ExpandableListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -105,15 +110,36 @@ public class NavigationDrawerFragment extends Fragment
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+
+
+        ArrayList<String> strings = Lists.newArrayList(getString(R.string.title_section1),
+                getString(R.string.title_section2),
+                getString(R.string.title_section3));
+
+        ArrayList<String> strings1 = Lists.newArrayList("bla", "blu");
+        ArrayList<String> strings2 = Lists.newArrayList("bla2", "blu2");
+
+        ArrayList<Object> objects = Lists.newArrayList();
+        objects.addAll(strings1);
+        objects.addAll(strings2);
+
+        mDrawerListView.setAdapter(new MainListViewAdapter(mDrawerListView.getContext(), strings, objects));
+
+//        mDrawerListView.setAdapter
+//                (
+//                        new ArrayAdapter<String>
+//                                (
+//                                        getActionBar().getThemedContext(),
+//                                        android.R.layout.simple_list_item_activated_1,
+//                                        android.R.id.text1,
+//                                        new String[]
+//                                                {
+//                                                        getString(R.string.title_section1),
+//                                                        getString(R.string.title_section2),
+//                                                        getString(R.string.title_section3),
+//                                                }
+//                                )
+//                );
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }

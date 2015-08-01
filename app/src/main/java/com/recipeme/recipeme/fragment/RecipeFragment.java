@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.ProgressBar;
 
 import com.google.common.collect.Lists;
 import com.recipeme.recipeme.R;
-import com.recipeme.recipeme.RecpieDeatilsActivity;
+import com.recipeme.recipeme.RecipeDeatilsActivity;
 import com.recipeme.recipeme.adapter.RecipeRowAdapter;
 import com.recipeme.recipeme.entities.Ingredient;
 import com.recipeme.recipeme.entities.Recipe;
@@ -81,8 +80,8 @@ public class RecipeFragment extends Fragment
                 {
                     Recipe recipe = (Recipe) parent.getItemAtPosition(position);
 
-                    RecpieDeatilsActivity.set(recipe);
-                    Intent intent = new Intent(view.getContext(), RecpieDeatilsActivity.class);
+                    RecipeDeatilsActivity.set(recipe);
+                    Intent intent = new Intent(view.getContext(), RecipeDeatilsActivity.class);
 
                     startActivity(intent);
                 }

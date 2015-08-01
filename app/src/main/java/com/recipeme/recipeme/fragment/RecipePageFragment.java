@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.recipeme.recipeme.Banner;
 import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.entities.Recipe;
 

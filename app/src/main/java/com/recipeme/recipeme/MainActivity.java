@@ -1,6 +1,5 @@
 package com.recipeme.recipeme;
 
-
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +17,7 @@ public class MainActivity extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
     private ListViewOnClickListener listViewOnClickListener = new ListViewOnClickListener();
+    private static boolean isFirstOperation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.enableLocalDatastore(this);
-
-        Parse.initialize(this, "nnXR6GoxN8TIVrtRzPkIeh9g2AHupgqIxNBOKX0V", "Xv9uWGiFBVB2nkwmq8dxEpfZf3DLGXty0ZV2iiLE");
-
+        if (!isFirstOperation)
+        {
+            Parse.enableLocalDatastore(this);
+            Parse.initialize(this, "nnXR6GoxN8TIVrtRzPkIeh9g2AHupgqIxNBOKX0V", "Xv9uWGiFBVB2nkwmq8dxEpfZf3DLGXty0ZV2iiLE");
+            isFirstOperation = true;
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
     }
+
     @Override
     public void onBackPressed()
     {
