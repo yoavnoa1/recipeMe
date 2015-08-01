@@ -1,16 +1,16 @@
 package com.recipeme.recipeme;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,11 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import com.google.common.collect.Lists;
-
-import java.util.ArrayList;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -57,7 +52,7 @@ public class NavigationDrawerFragment extends Fragment
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
-    private ExpandableListView mDrawerListView;
+    private ListView mDrawerListView;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
@@ -100,7 +95,7 @@ public class NavigationDrawerFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        mDrawerListView = (ExpandableListView) inflater.inflate(
+        mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -111,35 +106,21 @@ public class NavigationDrawerFragment extends Fragment
             }
         });
 
-
-        ArrayList<String> strings = Lists.newArrayList(getString(R.string.title_section1),
-                getString(R.string.title_section2),
-                getString(R.string.title_section3));
-
-        ArrayList<String> strings1 = Lists.newArrayList("bla", "blu");
-        ArrayList<String> strings2 = Lists.newArrayList("bla2", "blu2");
-
-        ArrayList<Object> objects = Lists.newArrayList();
-        objects.addAll(strings1);
-        objects.addAll(strings2);
-
-        mDrawerListView.setAdapter(new MainListViewAdapter(mDrawerListView.getContext(), strings, objects));
-
-//        mDrawerListView.setAdapter
-//                (
-//                        new ArrayAdapter<String>
-//                                (
-//                                        getActionBar().getThemedContext(),
-//                                        android.R.layout.simple_list_item_activated_1,
-//                                        android.R.id.text1,
-//                                        new String[]
-//                                                {
-//                                                        getString(R.string.title_section1),
-//                                                        getString(R.string.title_section2),
-//                                                        getString(R.string.title_section3),
-//                                                }
-//                                )
-//                );
+        mDrawerListView.setAdapter
+                (
+                        new ArrayAdapter<String>
+                                (
+                                        getActionBar().getThemedContext(),
+                                        android.R.layout.simple_list_item_activated_1,
+                                        android.R.id.text1,
+                                        new String[]
+                                                {
+                                                        getString(R.string.title_section1),
+                                                        getString(R.string.title_section2),
+                                                        getString(R.string.title_section3),
+                                                }
+                                )
+                );
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
