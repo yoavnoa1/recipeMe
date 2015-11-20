@@ -23,7 +23,22 @@
     <string name="title6">חלבונים</string>
     <string name="title7">אחרים</string>
 
+
+    <string name="title8">קינוחים</string>
+    <string name="title9">בשרים</string>
+    <string name="title10">ארוחות בוקר</string>
+    <string name="title11">ארוחות בריאות</string>
+    <string name="title12">סלטים</string>
+    <string name="title13">מרקים</string>
+    <string name="title14">מנות עיקריות</string>
+    <string name="title15">מנות ראשונות</string>
+    <string name="title16">פסטות</string>
+    <string name="title17">דגים</string>
+
     <string name="action_example">Example action</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_recpie_deatils">RecpieDeatilsActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

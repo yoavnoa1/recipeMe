@@ -7,31 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.recipeme.recipeme.R;
-import com.recipeme.recipeme.RecipeFilter;
+import com.recipeme.recipeme.entities.Ingredient;
 import com.recipeme.recipeme.entities.Recipe;
 
 import java.util.List;
 
-public class RecipeRowAdapter extends ArrayAdapter
+public class MainRecipeRowAdapter extends ArrayAdapter
 {
     private final List<Recipe> recipes;
     private final LayoutInflater layoutInflater;
 
-    private Filter filter;
-
-    public RecipeRowAdapter(List<Recipe> recipes, LayoutInflater layoutInflater, Context context)
+    public MainRecipeRowAdapter(Context context, int resource, List<Recipe> recipes, LayoutInflater layoutInflater)
     {
-        super(context, R.layout.recipe_row_layout, recipes);
+        super(context, resource);
         this.recipes = recipes;
         this.layoutInflater = layoutInflater;
-
-        filter = new RecipeFilter(recipes, this);
     }
 
     @Override
@@ -57,21 +52,15 @@ public class RecipeRowAdapter extends ArrayAdapter
     {
         if (convertView == null)
         {
-            convertView = layoutInflater.inflate(R.layout.recipe_row_layout, null);
+            convertView = layoutInflater.inflate(R.layout.main_recipe_row_layout, null);
         }
 
         byte[] picture = recipes.get(position).getPicture();
         Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
 
-        ((ImageView)convertView.findViewById(R.id.avatar)).setImageBitmap(bitmap);
-        ((TextView)convertView.findViewById(R.id.recipe_name)).setText(recipes.get(position).getName());
+        ((ImageView)convertView.findViewById(R.id.mainImageView)).setImageBitmap(bitmap);
+        ((TextView)convertView.findViewById(R.id.main_recipe_title)).setText(recipes.get(position).getName());
 
         return convertView;
-    }
-
-    @Override
-    public Filter getFilter()
-    {
-        return filter;
     }
 }

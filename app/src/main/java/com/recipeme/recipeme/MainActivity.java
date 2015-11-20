@@ -1,5 +1,6 @@
 package com.recipeme.recipeme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.parse.Parse;
+import com.recipeme.recipeme.adapter.MainRecipeRowAdapter;
+import com.recipeme.recipeme.fragment.RecipeFragment2;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -69,16 +73,14 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private <T extends Fragment> void startFragment(T fragment)
-    {
+    private <T extends Fragment> void startFragment(T fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.drawer_layout, fragment)
                 .addToBackStack("tag")
                 .commit();
     }
 
-    private void setupDrawerContent(NavigationView navigationView)
-    {
+    private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener()
                 {
@@ -106,9 +108,16 @@ public class MainActivity extends AppCompatActivity
 
                             case R.id.nav_friends:
                             {
-
+                                RecipeFragment2 recipeFragment2 = new RecipeFragment2();
+                                startFragment(recipeFragment2);
+                            }
+                            case R.id.nav_discussion: {
                                 break;
                             }
+                            case R.id.nav_discussion1: {
+                                break;
+                            }
+
                         }
 
                         menuItem.setChecked(true);
@@ -119,15 +128,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed()
-    {
-        if (getSupportFragmentManager().getBackStackEntryCount() != 0)
-        {
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
             getSupportFragmentManager().popBackStack();
 
-        }
-        else
-        {
+        } else {
             super.onBackPressed();
         }
     }

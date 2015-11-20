@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import com.recipeme.recipeme.TextChangedListener;
 import com.recipeme.recipeme.adapter.IngredientRowAdapter;
 import com.recipeme.recipeme.ListViewOnClickListener;
 import com.recipeme.recipeme.R;
@@ -17,8 +19,6 @@ import java.util.List;
 
 public class SweetsFragment extends Fragment
 {
-    private IngredientRowAdapter<Sweets> rowAdapter;
-    private ListViewOnClickListener listViewOnClickListener;
     private View view = null;
 
     @Override
@@ -29,11 +29,14 @@ public class SweetsFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Sweets> sweetses = new Model().fetchIngredients(Sweets.class);
-            rowAdapter = new IngredientRowAdapter<>(inflater, sweetses, getActivity().getBaseContext());
-            listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<Sweets> rowAdapter = new IngredientRowAdapter<>(inflater, sweetses, getActivity().getBaseContext());
+            ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);
+
+            EditText query = (EditText) view.findViewById(R.id.edit_query);
+            query.addTextChangedListener(new TextChangedListener<>(rowAdapter));
         }
 
         return view;

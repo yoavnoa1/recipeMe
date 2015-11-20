@@ -68,7 +68,7 @@ public class RecipeFragment extends Fragment
         @Override
         protected void onPostExecute(Collection<Recipe> recipes)
         {
-            RecipeRowAdapter rowAdapter = new RecipeRowAdapter(Lists.newArrayList(recipes), inflater);
+            RecipeRowAdapter rowAdapter = new RecipeRowAdapter(Lists.newArrayList(recipes), inflater, getActivity().getBaseContext());
             ListView list = (ListView) view.findViewById(R.id.recipe_listView);
             list.setAdapter(rowAdapter);
             progressBar.setVisibility(View.GONE);

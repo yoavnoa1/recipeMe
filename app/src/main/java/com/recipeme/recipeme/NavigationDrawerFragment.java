@@ -22,11 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
-/**
- * Fragment used for managing interactions for and presentation of a navigation drawer.
- * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
- * design guidelines</a> for a complete explanation of the behaviors implemented here.
- */
 public class NavigationDrawerFragment extends Fragment
 {
 
@@ -118,6 +113,8 @@ public class NavigationDrawerFragment extends Fragment
                                                         getString(R.string.title_section1),
                                                         getString(R.string.title_section2),
                                                         getString(R.string.title_section3),
+                                                        getString(R.string.title_section4),
+                                                        getString(R.string.title_section5),
                                                 }
                                 )
                 );
@@ -130,12 +127,6 @@ public class NavigationDrawerFragment extends Fragment
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
-    /**
-     * Users of this fragment must call this method to set up the navigation drawer interactions.
-     *
-     * @param fragmentId   The android:id of this fragment in its activity's layout.
-     * @param drawerLayout The DrawerLayout containing this fragment's UI.
-     */
     public void setUp(int fragmentId, DrawerLayout drawerLayout)
     {
         mFragmentContainerView = getActivity().findViewById(fragmentId);

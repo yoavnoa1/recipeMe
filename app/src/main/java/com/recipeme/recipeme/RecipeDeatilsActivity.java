@@ -49,6 +49,9 @@ public class RecipeDeatilsActivity extends AppCompatActivity
         Drawable drawable = new BitmapDrawable(bitmap);
         imageView.setImageDrawable(drawable);
 
+        ((TextView) findViewById(R.id.time)).setText(recipe.getTime());
+        ((TextView) findViewById(R.id.level)).setText(recipe.getLevel());
+        ((TextView) findViewById(R.id.kosher)).setText(recipe.getKosher());
         ((TextView) findViewById(R.id.prep)).setText(recipe.getPreparation());
         ((TextView) findViewById(R.id.ing)).setText(recipe.getIngredient());
     }

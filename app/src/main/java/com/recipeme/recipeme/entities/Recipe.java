@@ -12,7 +12,7 @@ public class Recipe implements Serializable
     private String preparation;
     private String ingredient;
     private String time;
-    private int level;
+    private String level;
     private String kosher;
     private byte[] picture;
 
@@ -56,12 +56,12 @@ public class Recipe implements Serializable
         this.time = time;
     }
 
-    public int getLevel()
+    public String getLevel()
     {
         return level;
     }
 
-    public void setLevel(int level)
+    public void setLevel(String level)
     {
         this.level = level;
     }

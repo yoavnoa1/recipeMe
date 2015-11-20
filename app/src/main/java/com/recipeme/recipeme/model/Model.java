@@ -79,7 +79,7 @@ public class Model
                 recipe.setPreparation(input.getString("Preparation"));
                 recipe.setIngredient(input.getString("Ingredient"));
                 recipe.setTime(input.getString("Time"));
-                recipe.setLevel(input.getInt("Level"));
+                recipe.setLevel(input.getString("Level"));
                 recipe.setKosher(input.getString("Kosher"));
                 try
                 {
@@ -93,6 +93,99 @@ public class Model
                 return recipe;
             }
         });
+    }
+
+    public Collection<Recipe> fetchRecipesBy(ParseObject categoryRecipe)
+    {
+        ParseQuery<ParseObject> query = new ParseQuery<>("Recipe");
+        query.include("RSCategories");
+        query.whereEqualTo("RSCategories", categoryRecipe);
+
+        List<ParseObject> queriedObjects = Lists.newArrayList();
+        try
+        {
+            query.include("Level");
+            queriedObjects = query.find();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return Collections2.transform(queriedObjects, new Function<ParseObject, Recipe>()
+        {
+            @Override
+            public Recipe apply(ParseObject input)
+            {
+                ParseObject recipeLevel;
+                recipeLevel = input.getParseObject("Level");
+
+                Recipe recipe = new Recipe();
+                recipe.setId(input.getString("objectId"));
+                recipe.setName(input.getString("Name"));
+                recipe.setPreparation(input.getString("Preparation"));
+                recipe.setIngredient(input.getString("Ingredient"));
+                recipe.setTime(input.getString("Time"));
+                recipe.setLevel(recipeLevel.getString("Name"));
+                recipe.setKosher(input.getString("Kosher"));
+                try
+                {
+                    recipe.setPicture(((ParseFile) input.get("Picture")).getData());
+                }
+                catch (ParseException e)
+                {
+                    e.printStackTrace();
+                }
+
+                return recipe;
+            }
+        });
+    }
+
+    public Collection<Recipe> getAll()
+    {
+        List<ParseObject> queriedObjects = Lists.newArrayList();
+        ParseQuery<ParseObject> query = new ParseQuery<>("Recipe");
+
+        try
+        {
+            query.include("Level");
+            queriedObjects = query.find();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return Collections2.transform(queriedObjects, new Function<ParseObject, Recipe>()
+        {
+            @Override
+            public Recipe apply(ParseObject input)
+            {
+                ParseObject recipeLevel;
+                recipeLevel = input.getParseObject("Level");
+
+                Recipe recipe = new Recipe();
+                recipe.setId(input.getString("objectId"));
+                recipe.setName(input.getString("Name"));
+                recipe.setPreparation(input.getString("Preparation"));
+                recipe.setIngredient(input.getString("Ingredient"));
+                recipe.setTime(input.getString("Time"));
+                recipe.setLevel(recipeLevel.getString("Level"));
+                recipe.setKosher(input.getString("Kosher"));
+                try
+                {
+                    recipe.setPicture(((ParseFile) input.get("Picture")).getData());
+                }
+                catch (ParseException e)
+                {
+                    e.printStackTrace();
+                }
+
+                return recipe;
+            }
+        });
+
     }
 
     private HashMap<String, List<String>> createIngredientsMap(List<Ingredient> ingredients)
@@ -112,6 +205,23 @@ public class Model
             }
         }
         return map;
+    }
+
+    public Collection<ParseObject> fetchCategoryRecipeBy(String nameCategory)
+    {
+        ParseQuery<ParseObject> query = new ParseQuery<>("CategoriesRecipes");
+
+        query.whereEqualTo("Name", nameCategory);
+
+        try
+        {
+            return query.find();
+        } catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return Lists.newArrayList();
     }
 
     private List<ParseObject> fetchBy(String className, List<String> ingredients)
