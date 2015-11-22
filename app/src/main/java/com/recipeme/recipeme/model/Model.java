@@ -44,6 +44,26 @@ public class Model
         return dairies;
     }
 
+
+    public List<Recipe> fetchFavorietRecipes(List<String> recipesIds)
+    {
+        ParseQuery<ParseObject> query = new ParseQuery<>("Recipe");
+        try
+        {
+            List<ParseObject> parseObjects = query.whereContainedIn("objectId", recipesIds).find();
+
+            return Lists.<Recipe>newArrayList(getTransform(parseObjects));
+
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return Lists.<Recipe>newArrayList();
+    }
+
+
     public Collection<Recipe> fetchRecipesBy(List<Ingredient> ingredients)
     {
         HashMap<String, List<String>> map = createIngredientsMap(ingredients);
@@ -68,13 +88,18 @@ public class Model
             e.printStackTrace();
         }
 
+        return getTransform(queriedObjects);
+    }
+
+    private Collection<Recipe> getTransform(List<ParseObject> queriedObjects)
+    {
         return Collections2.transform(queriedObjects, new Function<ParseObject, Recipe>()
         {
             @Override
             public Recipe apply(ParseObject input)
             {
                 Recipe recipe = new Recipe();
-                recipe.setId(input.getString("objectId"));
+                recipe.setId(input.getObjectId());
                 recipe.setName(input.getString("Name"));
                 recipe.setPreparation(input.getString("Preparation"));
                 recipe.setIngredient(input.getString("Ingredient"));
@@ -121,7 +146,7 @@ public class Model
                 recipeLevel = input.getParseObject("Level");
 
                 Recipe recipe = new Recipe();
-                recipe.setId(input.getString("objectId"));
+                recipe.setId(input.getObjectId());
                 recipe.setName(input.getString("Name"));
                 recipe.setPreparation(input.getString("Preparation"));
                 recipe.setIngredient(input.getString("Ingredient"));

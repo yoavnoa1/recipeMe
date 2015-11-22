@@ -6,23 +6,30 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.recipeme.recipeme.entities.Recipe;
+import com.recipeme.recipeme.model.DbHelper;
 
 public class RecipeDeatilsActivity extends AppCompatActivity
 {
     private static Recipe recipe;
+    private DbHelper dbHelper;
+    private boolean isFavorite = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recpie_deatils);
+
+        dbHelper = new DbHelper(this);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -33,6 +40,40 @@ public class RecipeDeatilsActivity extends AppCompatActivity
         collapsingToolbar.setTitle(recipe.getName());
 
         loadBackdrop();
+
+        setFavoriteButton();
+    }
+
+    private void setFavoriteButton()
+    {
+        final FloatingActionButton button = (FloatingActionButton) findViewById(R.id.fav_button);
+
+        isFavorite = dbHelper.isFavoriteExists(recipe.getId());
+
+        if(isFavorite)
+        {
+            button.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_rating_star_on_mtrl_alpha));
+        }
+
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (isFavorite)
+                {
+                    dbHelper.removeFavorite(recipe);
+                    isFavorite = false;
+                    button.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_rating_star_off_mtrl_alpha));
+                }
+                else
+                {
+                    dbHelper.insertFavorite(recipe);
+                    isFavorite = true;
+                    button.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_rating_star_on_mtrl_alpha));
+                }
+            }
+        });
     }
 
     public static void set(Recipe input)

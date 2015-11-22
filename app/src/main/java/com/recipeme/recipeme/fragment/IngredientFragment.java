@@ -1,4 +1,4 @@
-package com.recipeme.recipeme;
+package com.recipeme.recipeme.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.recipeme.recipeme.ListViewOnClickListener;
+import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.adapter.IngredientAdapterFactory;
 import com.recipeme.recipeme.fragment.RecipeFragment;
 

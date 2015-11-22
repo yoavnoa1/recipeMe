@@ -1,6 +1,5 @@
 package com.recipeme.recipeme;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,17 +10,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.parse.Parse;
-import com.recipeme.recipeme.adapter.MainRecipeRowAdapter;
+import com.recipeme.recipeme.fragment.FavRecipeFragment;
+import com.recipeme.recipeme.fragment.IngredientFragment;
 import com.recipeme.recipeme.fragment.RecipeFragment2;
+import com.recipeme.recipeme.model.DbHelper;
+import com.recipeme.recipeme.model.Model;
 
 public class MainActivity extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
     private ListViewOnClickListener listViewOnClickListener = new ListViewOnClickListener();
     private static boolean isFirstOperation = false;
+    public static DbHelper dbHelper;
+    public static Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity
         {
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "nnXR6GoxN8TIVrtRzPkIeh9g2AHupgqIxNBOKX0V", "Xv9uWGiFBVB2nkwmq8dxEpfZf3DLGXty0ZV2iiLE");
+            dbHelper = new DbHelper(this);
+            model = new Model();
             isFirstOperation = true;
         }
 
@@ -73,14 +78,16 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private <T extends Fragment> void startFragment(T fragment) {
+    private <T extends Fragment> void startFragment(T fragment)
+    {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.drawer_layout, fragment)
                 .addToBackStack("tag")
                 .commit();
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
+    private void setupDrawerContent(NavigationView navigationView)
+    {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener()
                 {
@@ -110,14 +117,20 @@ public class MainActivity extends AppCompatActivity
                             {
                                 RecipeFragment2 recipeFragment2 = new RecipeFragment2();
                                 startFragment(recipeFragment2);
-                            }
-                            case R.id.nav_discussion: {
                                 break;
                             }
-                            case R.id.nav_discussion1: {
-                                break;
-                            }
+                            case R.id.nav_favorites:
+                            {
+                                FavRecipeFragment fragment = new FavRecipeFragment();
 
+                                startFragment(fragment);
+
+                                break;
+                            }
+                            case R.id.nav_discussion1:
+                            {
+                                break;
+                            }
                         }
 
                         menuItem.setChecked(true);
@@ -128,11 +141,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+    public void onBackPressed()
+    {
+        if (getSupportFragmentManager().getBackStackEntryCount() != 0)
+        {
             getSupportFragmentManager().popBackStack();
 
-        } else {
+        }
+        else
+        {
             super.onBackPressed();
         }
     }
