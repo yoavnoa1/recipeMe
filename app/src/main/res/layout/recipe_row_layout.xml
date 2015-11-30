@@ -16,8 +16,14 @@
         android:layout_marginRight="16dp"/>
 
     <TextView
+        android:id="@+id/less_ingredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"/>
+
+    <TextView
         android:id="@+id/recipe_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"/>
 </LinearLayout>
