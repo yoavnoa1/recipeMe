@@ -12,6 +12,7 @@ public class Recipe implements Serializable
     private String level;
     private String kosher;
     private byte[] picture;
+    private Integer lessIngredient;
 
     public String getId()
     {
@@ -91,5 +92,13 @@ public class Recipe implements Serializable
     public void setIngredient(String ingredient)
     {
         this.ingredient = ingredient;
+    }
+
+    public Integer getLessIngredient() {
+        return lessIngredient;
+    }
+
+    public void setLessIngredient(Integer lessIngredient) {
+        this.lessIngredient = lessIngredient;
     }
 }

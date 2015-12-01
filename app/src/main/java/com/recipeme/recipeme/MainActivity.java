@@ -7,16 +7,26 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.common.collect.Lists;
 import com.parse.Parse;
+import com.recipeme.recipeme.adapter.RecipeCardAdapter;
+import com.recipeme.recipeme.entities.Recipe;
+import com.recipeme.recipeme.fragment.MainPageFragment;
 import com.recipeme.recipeme.fragment.FavRecipeFragment;
 import com.recipeme.recipeme.fragment.IngredientFragment;
 import com.recipeme.recipeme.fragment.RecipeFragment2;
+import com.recipeme.recipeme.model.Model;
 import com.recipeme.recipeme.model.DbHelper;
 import com.recipeme.recipeme.model.Model;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -55,7 +65,6 @@ public class MainActivity extends AppCompatActivity
         {
             setupDrawerContent(navigationView);
         }
-
     }
 
     @Override
@@ -98,6 +107,8 @@ public class MainActivity extends AppCompatActivity
                         {
                             case R.id.nav_home:
                             {
+                                MainPageFragment mainPageFragment = new MainPageFragment();
+                                startFragment(mainPageFragment);
                                 break;
                             }
 
