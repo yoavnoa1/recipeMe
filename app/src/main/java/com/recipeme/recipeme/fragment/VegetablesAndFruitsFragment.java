@@ -29,8 +29,8 @@ public class VegetablesAndFruitsFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<VegetablesAndFruits> vegetablesAndFruitses = new Model().fetchIngredients(VegetablesAndFruits.class);
-            IngredientRowAdapter<VegetablesAndFruits> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), vegetablesAndFruitses, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<VegetablesAndFruits> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), vegetablesAndFruitses, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);

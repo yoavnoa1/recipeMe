@@ -29,8 +29,8 @@ public class GrainsAndBeansFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<GrainsAndBeans> dairies = new Model().fetchIngredients(GrainsAndBeans.class);
-            IngredientRowAdapter<GrainsAndBeans> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), dairies, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<GrainsAndBeans> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), dairies, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);

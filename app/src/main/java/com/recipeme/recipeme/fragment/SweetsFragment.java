@@ -29,8 +29,8 @@ public class SweetsFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Sweets> sweetses = new Model().fetchIngredients(Sweets.class);
-            IngredientRowAdapter<Sweets> rowAdapter = new IngredientRowAdapter<>(inflater, sweetses, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<Sweets> rowAdapter = new IngredientRowAdapter<>(inflater, sweetses, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);

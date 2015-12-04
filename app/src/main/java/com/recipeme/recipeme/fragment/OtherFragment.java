@@ -29,8 +29,8 @@ public class OtherFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Other> others = new Model().fetchIngredients(Other.class);
-            IngredientRowAdapter<Other> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), others, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<Other> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), others, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);

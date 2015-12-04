@@ -1,6 +1,7 @@
 package com.recipeme.recipeme.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.recipeme.recipeme.IngredientFilter;
+import com.recipeme.recipeme.ListViewOnClickListener;
 import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.entities.Ingredient;
 
@@ -20,12 +22,14 @@ public class IngredientRowAdapter<T extends Ingredient> extends ArrayAdapter<T> 
     private final List<T> ingredients;
     private final LayoutInflater layoutInflater;
     private IngredientFilter<T> filter;
+    private final ListViewOnClickListener listViewOnClickListener;
 
-    public IngredientRowAdapter(LayoutInflater layoutInflater, List<T> ingredients, Context context)
+    public IngredientRowAdapter(LayoutInflater layoutInflater, List<T> ingredients, Context context, ListViewOnClickListener listViewOnClickListener)
     {
         super(context, R.layout.ingredient_row_layout, ingredients);
         this.ingredients = ingredients;
         this.layoutInflater = layoutInflater;
+        this.listViewOnClickListener = listViewOnClickListener;
 
         filter = new IngredientFilter<>(ingredients, this);
     }
@@ -58,7 +62,17 @@ public class IngredientRowAdapter<T extends Ingredient> extends ArrayAdapter<T> 
             vi = layoutInflater.inflate(R.layout.ingredient_row_layout, null);
         }
 
-        ((TextView)vi.findViewById(R.id.textView)).setText(ingredients.get(position).getName());
+        if (listViewOnClickListener.getIngredients().contains(ingredients.get(position)))
+        {
+            vi.setBackgroundColor(Color.parseColor("#FF595A57"));
+            ((TextView) vi.findViewById(R.id.textView)).setTextColor(Color.WHITE);
+        }
+        else
+        {
+            vi.setBackgroundColor(Color.parseColor("#FFF5F5F5"));
+            ((TextView) vi.findViewById(R.id.textView)).setTextColor(Color.BLACK);
+        }
+        ((TextView) vi.findViewById(R.id.textView)).setText(ingredients.get(position).getName());
 
         return vi;
     }

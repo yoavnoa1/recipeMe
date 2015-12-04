@@ -29,8 +29,8 @@ public class DairyFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Dairy> dairies = new Model().fetchIngredients(Dairy.class);
-            IngredientRowAdapter<Dairy> rowAdapter = new IngredientRowAdapter<>(inflater, dairies, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<Dairy> rowAdapter = new IngredientRowAdapter<>(inflater, dairies, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             EditText query = (EditText) view.findViewById(R.id.edit_query);
             list.setAdapter(rowAdapter);

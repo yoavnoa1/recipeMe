@@ -30,8 +30,8 @@ public class OilsFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Oils> oils = new Model().fetchIngredients(Oils.class);
-            IngredientRowAdapter<Oils> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), oils, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<Oils> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), oils, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);

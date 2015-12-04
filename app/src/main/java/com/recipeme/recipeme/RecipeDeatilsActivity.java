@@ -7,12 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.recipeme.recipeme.entities.Recipe;
 import com.recipeme.recipeme.model.DbHelper;
@@ -52,7 +54,7 @@ public class RecipeDeatilsActivity extends AppCompatActivity
 
         if(isFavorite)
         {
-            button.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_rating_star_on_mtrl_alpha));
+            button.setImageDrawable(getResources().getDrawable(R.drawable.star_fav_full));
         }
 
         button.setOnClickListener(new View.OnClickListener()
@@ -65,12 +67,20 @@ public class RecipeDeatilsActivity extends AppCompatActivity
                     dbHelper.removeFavorite(recipe);
                     isFavorite = false;
                     button.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_rating_star_off_mtrl_alpha));
+
+                    Snackbar snackbar = Snackbar
+                            .make(v, "מתכון נמחק מהמועדפים", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
                 }
                 else
                 {
                     dbHelper.insertFavorite(recipe);
                     isFavorite = true;
-                    button.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_rating_star_on_mtrl_alpha));
+                    button.setImageDrawable(getResources().getDrawable(R.drawable.star_fav_full));
+
+                    Snackbar snackbar = Snackbar
+                            .make(v, "מתכון נוסף למועדפים", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
                 }
             }
         });

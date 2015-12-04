@@ -29,8 +29,8 @@ public class ProteinFragment extends Fragment
             view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
             List<Protein> proteins = new Model().fetchIngredients(Protein.class);
-            IngredientRowAdapter<Protein> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), proteins, getActivity().getBaseContext());
             ListViewOnClickListener listViewOnClickListener = (ListViewOnClickListener) getArguments().get("Listener");
+            IngredientRowAdapter<Protein> rowAdapter = new IngredientRowAdapter<>(getLayoutInflater(savedInstanceState), proteins, getActivity().getBaseContext(), listViewOnClickListener);
             ListView list = (ListView) view.findViewById(R.id.ingredient_listView);
             list.setAdapter(rowAdapter);
             list.setOnItemClickListener(listViewOnClickListener);

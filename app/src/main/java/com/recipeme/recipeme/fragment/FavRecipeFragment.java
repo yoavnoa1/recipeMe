@@ -16,9 +16,7 @@ import com.recipeme.recipeme.MainActivity;
 import com.recipeme.recipeme.R;
 import com.recipeme.recipeme.RecipeDeatilsActivity;
 import com.recipeme.recipeme.adapter.RecipeRowAdapter;
-import com.recipeme.recipeme.entities.Ingredient;
 import com.recipeme.recipeme.entities.Recipe;
-import com.recipeme.recipeme.model.Model;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,16 +25,34 @@ public class FavRecipeFragment extends Fragment
 {
     private View view = null;
     private ProgressBar progressBar;
+    private LayoutInflater layoutInflater = null;
+    private FetchTask asyncTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        layoutInflater = inflater;
         view = inflater.inflate(R.layout.fragment_recipe, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBarRecipeFragment);
         progressBar.setVisibility(View.GONE);
 
-        new FetchTask(inflater).execute();
+        asyncTask = new FetchTask(inflater);
+        asyncTask.execute();
+
         return view;
+    }
+
+    @Override
+    public void onResume()
+    {
+        if (layoutInflater != null && asyncTask.getStatus().equals(AsyncTask.Status.FINISHED))
+        {
+            view.setVisibility(View.GONE);
+            asyncTask = new FetchTask(layoutInflater);
+            asyncTask.execute();
+        }
+
+        super.onResume();
     }
 
     class FetchTask extends AsyncTask<Void, Void, Collection<Recipe>>
@@ -51,6 +67,7 @@ public class FavRecipeFragment extends Fragment
         @Override
         protected void onPreExecute()
         {
+            view.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);
         }
 

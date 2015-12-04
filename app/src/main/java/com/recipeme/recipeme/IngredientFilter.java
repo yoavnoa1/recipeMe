@@ -33,7 +33,7 @@ public class IngredientFilter<T extends Ingredient> extends Filter
 
             for (T ingredient : ingredientsCopy)
             {
-                if(ingredient.getName().contains(constraint))
+                if (ingredient.getName().contains(constraint))
                 {
                     tempList.add(ingredient);
                 }
@@ -52,9 +52,12 @@ public class IngredientFilter<T extends Ingredient> extends Filter
         ingredients.clear();
         ingredients.addAll((ArrayList<T>) results.values);
 
-        if (results.count > 0) {
+        if (results.count > 0)
+        {
             dairyArrayAdapter.notifyDataSetChanged();
-        } else {
+        }
+        else
+        {
             dairyArrayAdapter.notifyDataSetInvalidated();
         }
     }

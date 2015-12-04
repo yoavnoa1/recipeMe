@@ -1,9 +1,8 @@
 package com.recipeme.recipeme;
 
-import android.graphics.Color;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.TextView;
 
 import com.recipeme.recipeme.entities.Ingredient;
 
@@ -19,18 +18,16 @@ public class ListViewOnClickListener implements AdapterView.OnItemClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         Ingredient ingredient = (Ingredient) parent.getItemAtPosition(position);
+        Adapter adapter = parent.getAdapter();
         if (ingredients.contains(ingredient))
         {
             ingredients.remove(ingredient);
-            view.setBackgroundColor(Color.parseColor("#FFF5F5F5"));
-            ((TextView)view.findViewById(R.id.textView)).setTextColor(Color.BLACK);
-
+            adapter.getView(position, view, parent);
         }
         else
         {
             ingredients.add(ingredient);
-            view.setBackgroundColor(Color.parseColor("#FF595A57"));
-            ((TextView)view.findViewById(R.id.textView)).setTextColor(Color.WHITE);
+            adapter.getView(position, view, parent);
         }
     }
 
