@@ -3,15 +3,18 @@ package com.recipeme.recipeme;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.common.collect.Lists;
 import com.parse.Parse;
@@ -55,16 +58,96 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
-
+        if (ab != null)
+        {
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null)
+        navigationView.setNavigationItemSelectedListener
+                (
+                        new NavigationView.OnNavigationItemSelectedListener()
+                        {
+                            @Override
+                            public boolean onNavigationItemSelected(MenuItem menuItem)
+                            {
+                                switch (menuItem.getItemId())
+                                {
+                                    case R.id.nav_home:
+                                    {
+                                        MainPageFragment mainPageFragment = new MainPageFragment();
+                                        startFragment(mainPageFragment);
+                                        break;
+                                    }
+
+                                    case R.id.nav_messages:
+                                    {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("Listener", listViewOnClickListener);
+
+                                        IngredientFragment fragment = new IngredientFragment();
+                                        fragment.setArguments(bundle);
+
+                                        startFragment(fragment);
+                                        break;
+                                    }
+
+                                    case R.id.nav_friends:
+                                    {
+                                        RecipeFragment2 recipeFragment2 = new RecipeFragment2();
+                                        startFragment(recipeFragment2);
+                                        break;
+                                    }
+                                    case R.id.nav_favorites:
+                                    {
+                                        FavRecipeFragment fragment = new FavRecipeFragment();
+
+                                        startFragment(fragment);
+
+                                        break;
+                                    }
+                                    case R.id.nav_discussion1:
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                menuItem.setChecked(true);
+                                mDrawerLayout.closeDrawers();
+                                return true;
+                            }
+                        }
+                );
+
+        //setupDrawerContent(navigationView);
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         {
-            setupDrawerContent(navigationView);
-        }
+
+            @Override
+            public void onDrawerClosed(View drawerView)
+            {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView)
+            {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        //Setting the actionbarToggle to drawer layout
+        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+        //calling sync state is necessay or else your hamburger icon wont show up
+        actionBarDrawerToggle.syncState();
+
     }
 
     @Override
@@ -80,7 +163,7 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId())
         {
             case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
+                // mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
 
@@ -89,8 +172,9 @@ public class MainActivity extends AppCompatActivity
 
     private <T extends Fragment> void startFragment(T fragment)
     {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.drawer_layout, fragment)
+        FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction1
+                .replace(R.id.frame, fragment)
                 .addToBackStack("tag")
                 .commit();
     }

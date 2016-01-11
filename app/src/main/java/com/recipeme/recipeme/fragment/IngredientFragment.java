@@ -57,6 +57,7 @@ public class IngredientFragment extends Fragment
             viewPager.setAdapter(ingredientAdapter);
         }
 
+        root.setVisibility(View.VISIBLE);
         return root;
     }
 

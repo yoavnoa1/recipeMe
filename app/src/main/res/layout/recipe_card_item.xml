@@ -32,7 +32,7 @@
                 android:id="@+id/cardImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView"
+                android:layout_alignEnd="@+id/cardTitle"
                 android:layout_marginTop="10dp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

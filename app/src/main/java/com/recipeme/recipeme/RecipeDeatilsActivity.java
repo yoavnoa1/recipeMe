@@ -33,7 +33,7 @@ public class RecipeDeatilsActivity extends AppCompatActivity
 
         dbHelper = new DbHelper(this);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
