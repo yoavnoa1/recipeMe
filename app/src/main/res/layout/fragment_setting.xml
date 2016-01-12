@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.recipeme.recipeme.fragment.SettingFragment"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/frameLayout"
+        android:background="@drawable/layout_border">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="General information"
+            android:id="@+id/GeneralInformationTV"
+            android:layout_gravity="left|top"
+            android:textColor="@color/title"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Contact support"
+            android:id="@+id/ContactSupportTV"
+            android:layout_below="@+id/frameLayout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/frameLayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/layout_border"
+        android:id="@+id/frameLayout2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Notifications"
+            android:id="@+id/NotificationsTV"
+            android:layout_gravity="left|top"
+            android:textColor="@color/title"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Allow notifications"
+            android:id="@+id/AllowNotificationsTV"
+            android:layout_gravity="left|bottom"
+            android:layout_marginLeft="10dp" />
+
+        <CheckBox
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox"
+            android:layout_gravity="right|bottom" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/frameLayout2"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/layout_border">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Cache"
+            android:id="@+id/CacheTV"
+            android:layout_gravity="left|top"
+            android:textColor="@color/title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Flush cache"
+            android:id="@+id/FlushCacheTV"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Delete cache"
+            android:id="@+id/DeleteCacheTV"
+            android:layout_gravity="left|bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp" />
+    </FrameLayout>
+
+</RelativeLayout>

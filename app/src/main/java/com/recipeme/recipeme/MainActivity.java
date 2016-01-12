@@ -24,12 +24,15 @@ import com.recipeme.recipeme.fragment.MainPageFragment;
 import com.recipeme.recipeme.fragment.FavRecipeFragment;
 import com.recipeme.recipeme.fragment.IngredientFragment;
 import com.recipeme.recipeme.fragment.RecipeFragment2;
+import com.recipeme.recipeme.fragment.SettingFragment;
 import com.recipeme.recipeme.model.Model;
 import com.recipeme.recipeme.model.DbHelper;
 import com.recipeme.recipeme.model.Model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -110,6 +113,9 @@ public class MainActivity extends AppCompatActivity
                                     }
                                     case R.id.nav_discussion1:
                                     {
+                                        SettingFragment settingFragment = new SettingFragment();
+
+                                        startFragment(settingFragment);
                                         break;
                                     }
                                 }
@@ -224,6 +230,10 @@ public class MainActivity extends AppCompatActivity
                             }
                             case R.id.nav_discussion1:
                             {
+                                SettingFragment settingFragment = new SettingFragment();
+
+                                startFragment(settingFragment);
+
                                 break;
                             }
                         }
