@@ -3,6 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_sharing">שתף</string>
     <string name="title_activity_ingredient">IngredientActiv</string>
     <string name="title_activity_main2">Main2Activity</string>
 

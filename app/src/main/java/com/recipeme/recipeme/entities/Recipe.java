@@ -1,6 +1,7 @@
 package com.recipeme.recipeme.entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Recipe implements Serializable
 {
@@ -100,5 +101,19 @@ public class Recipe implements Serializable
 
     public void setLessIngredient(Integer lessIngredient) {
         this.lessIngredient = lessIngredient;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", preparation='" + preparation + '\'' +
+                ", ingredient='" + ingredient + '\'' +
+                ", time='" + time + '\'' +
+                ", level='" + level + '\'' +
+                ", kosher='" + kosher + '\'' +
+                ", picture=" + Arrays.toString(picture) +
+                '}';
     }
 }

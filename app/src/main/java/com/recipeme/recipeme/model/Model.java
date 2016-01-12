@@ -8,7 +8,9 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.recipeme.recipeme.entities.CommandToRecipe;
 import com.recipeme.recipeme.entities.Ingredient;
+import com.recipeme.recipeme.entities.LikeToRecipeByUser;
 import com.recipeme.recipeme.entities.Recipe;
 import com.recipeme.recipeme.model.parser.IngredientParser;
 
@@ -49,6 +51,52 @@ public class Model {
         }
 
         return Lists.<Recipe>newArrayList();
+    }
+
+    public int getCountLikeOfRecipe(String recipeId)
+    {
+        ParseQuery<ParseObject> query = new ParseQuery<>("LikeToRecipeByUser");
+        query.whereEqualTo("RecipeId", recipeId);
+
+        try
+        {
+            return query.find().size();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public Boolean recipeHaveLike(String recipeId, String deviceId) {
+        ParseQuery<ParseObject> query = new ParseQuery<>("LikeToRecipeByUser");
+        query.whereEqualTo("RecipeId", recipeId);
+        query.whereEqualTo("DeviceId", deviceId);
+
+        try {
+            return query.find().size() > 0;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public void deleteRecipeLikeBy(String recipeId, String deviceId)
+    {
+        ParseQuery<ParseObject> query = new ParseQuery<>("LikeToRecipeByUser");
+        query.whereEqualTo("RecipeId", recipeId);
+        query.whereEqualTo("DeviceId", deviceId);
+
+
+        try
+        {
+            List<ParseObject> objects = query.find();
+            objects.get(0).delete();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public Collection<Recipe> fetchRecipesBy(final List<Ingredient> ingredients) {
@@ -218,6 +266,38 @@ public class Model {
             e.printStackTrace();
         }
 
+        return Lists.newArrayList();
+    }
+
+    public List<CommandToRecipe> getCommandToRecipesBy(String recipeId)
+    {
+        ParseQuery<ParseObject> query = new ParseQuery<>("CommandToRecipe");
+
+        try {
+
+            query.whereEqualTo("RecipeId", recipeId);
+
+            return Lists.newArrayList(Collections2.transform(query.find(), new Function<ParseObject, CommandToRecipe>()
+            {
+                @Override
+                public CommandToRecipe apply(ParseObject input)
+                {
+                    CommandToRecipe commandToRecipe = new CommandToRecipe();
+
+                    commandToRecipe.setId(input.getString("objectId"));
+                    commandToRecipe.setName(input.getString("Name"));
+                    commandToRecipe.setSubject(input.getString("Subject"));
+                    commandToRecipe.setCommand(input.getString("Command"));
+                    commandToRecipe.setRecipeId(input.getString("RecipeId"));
+
+                    return commandToRecipe;
+                }
+            }));
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
         return Lists.newArrayList();
     }
 }
